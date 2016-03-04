@@ -68,7 +68,7 @@ server.on("error", function(err) {
     console.log("Failed to start server:", err);
     process.exit(1);
 });
-    
+
 // WebSocket adapter
 var wss = new ws.Server({server: server});
 wss.on("connection", function(socket) {
@@ -81,12 +81,12 @@ wss.on("connection", function(socket) {
             try {
                 // Decode the Message
                 var msg = Message.decode(data);
-                console.log("Received: "+msg.text);
+                console.log("Received: "+msg.content.text);
                 // Transform the text to upper case
-                msg.text = msg.text.toUpperCase();
+                msg.content.text = msg.content.text.toUpperCase();
                 // Re-encode it and send it back
                 socket.send(msg.toBuffer());
-                console.log("Sent: "+msg.text);
+                console.log("Sent: "+msg.content.text);
             } catch (err) {
                 console.log("Processing failed:", err);
             }

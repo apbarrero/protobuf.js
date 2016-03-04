@@ -27,7 +27,8 @@ socket.binaryType = "arraybuffer"; // We are talking binary
 
 function send() {
     if (socket.readyState == WebSocket.OPEN) {
-        var msg = new Message(text.value);
+        var msg = new Message;
+        msg.content.text = text.value;
         socket.send(msg.toArrayBuffer());
         log.value += "Sent: "+msg.text+"\n";
     } else {
